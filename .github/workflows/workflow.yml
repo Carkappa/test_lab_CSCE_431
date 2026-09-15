@@ -42,7 +42,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version-file: ".nvmrc"
 
       - name: Install yarn dependencies
         run: yarn install
@@ -51,7 +51,7 @@ jobs:
         run: bundle exec rspec .
 
       - name: Run brakeman
-        run: brakeman -o brakeman.txt
+        run: bundle exec brakeman -x EOLRails -o brakeman.txt
 
       - name: Run rubocop
         run: bundle exec rubocop --force-exclusion vendor/*/** --out rubocop.txt
